@@ -7,7 +7,7 @@ $point2 = [100, 0];
 $point3 = [0, 100];
 $dot    = [100, 100];
 
-// Createing equation by two dotes.
+// Function of createing equation by  coordinates two dotes.
 function createEquationByTwoDotes($x1, $y1, $x2, $y2) {
 // y - y2    x - x2
 // ------- = -------
@@ -19,17 +19,23 @@ function createEquationByTwoDotes($x1, $y1, $x2, $y2) {
     
 // 2. X coefficient = $leftDenominator.   
     $xCoefficient = $leftDenominator;
+    //echo $xCoefficient . PHP_EOL;
     
 // 3. Y coefficient = $rightDenominator multiply on (-1).
     $yCoefficient = $rightDenominator * (-1);
+    //echo $yCoefficient . PHP_EOL;
     
 // 4. Right value = $rightDenominator * (-1 * $y2) - $leftDenominator * (-1 * $x2).
     $rightValue = $rightDenominator * (-1 * $y2) - $leftDenominator * (-1 * $x2);
-    echo $rightValue . PHP_EOL;
-//End of creating equation by two dotes.
+    //echo $rightValue . PHP_EOL;
+    
+    return [$xCoefficient, 'x', $yCoefficient, 'y', '=', $rightValue];
 }
 
-createEquationByTwoDotes(0, 100, 100, 0);
+$equation = createEquationByTwoDotes(0, 100, 100, 0);
+//echo implode($equation) . PHP_EOL;
+
+// Detect case.
 
 $flag = false;
 
