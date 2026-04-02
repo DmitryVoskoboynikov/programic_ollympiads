@@ -7,7 +7,7 @@ $point2 = [100, 0];
 $point3 = [0, 100];
 $dot    = [100, 100];
 
-// Function of createing equation by  coordinates two dotes.
+// Function of createing equation by coordinates of two dotes.
 function createEquationByTwoDotes($x1, $y1, $x2, $y2) {
 // y - y2    x - x2
 // ------- = -------
@@ -32,15 +32,40 @@ function createEquationByTwoDotes($x1, $y1, $x2, $y2) {
     return [$xCoefficient, 'x', $yCoefficient, 'y', '=', $rightValue];
 }
 
-$equation = createEquationByTwoDotes(0, 100, 100, 0);
-//echo implode($equation) . PHP_EOL;
+// Detect cases.
+// 1. 90 degrees angle at the left and two of three dotes on same line at the bottom.
 
-// Detect case.
+$x1 = 0;
+$y1 = 100;
+$x2 = 100;
+$y2 = 0;
+$equation = createEquationByTwoDotes($x1, $y1, $x2, $y2);
+echo implode($equation) . PHP_EOL;
 
-$flag = false;
+// Create lines.
+$lines = [];
+for ($y1; $y1 >= $y2; $y1--) {
+    $x = ($equation[5] - ($equation[2] * $y1)) / $equation[0];
+    $lines[$y1] = [$x1, $x];
+}
 
-if ($flag) {
-    echo "In";
+// 2. 90 degrees angle at the right and two of three dotes on same line at the bottom.
+
+// Create lines.
+
+// 3. ...
+
+
+// Test output of lines.
+/**
+foreach ($lines as $y => $range) {
+    echo $y . " - [" . implode(", ", $range) . "]" . PHP_EOL;
+}
+*/
+
+// Check if dot in triangle.
+if (isset($lines[$dot[1]]) && ($dot[0] >= $lines[$dot[1]][0] && $dot[0] <= $lines[$dot[1]][1])) {
+    echo "In" . PHP_EOL;
 } else {
     echo "Out" . PHP_EOL;
 }
