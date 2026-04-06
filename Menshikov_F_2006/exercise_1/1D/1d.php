@@ -5,7 +5,22 @@ echo "Task 1D." . PHP_EOL;
 $point1 = [0, 0];
 $point2 = [100, 0];
 $point3 = [0, 100];
-$dot    = [100, 100];
+$dot    = [13, 13];
+
+// Function that rightly sorting points
+$arrayOfPoints[] = $point1;
+$arrayOfPoints[] = $point2;
+$arrayOfPoints[] = $point3;
+function sortPoints($arrayOfPoints) {
+    //var_dump($arrayOfPoints);
+    
+    $maxY = $arrayOfPoints[0][1];
+    //var_dump($maxY);
+    
+    
+}
+
+sortPoints($arrayOfPoints);
 
 // Function of createing equation by coordinates of two dotes.
 function createEquationByTwoDotes($x1, $y1, $x2, $y2) {
@@ -34,6 +49,8 @@ function createEquationByTwoDotes($x1, $y1, $x2, $y2) {
 
 // Detect cases.
 // 1. 90 degrees angle at the left and two of three dotes on same line at the bottom.
+
+
 
 $x1 = 0;
 $y1 = 100;
