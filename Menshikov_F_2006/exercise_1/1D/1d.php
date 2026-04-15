@@ -5,22 +5,7 @@ echo "Task 1D." . PHP_EOL;
 $point1 = [0, 0];
 $point2 = [100, 0];
 $point3 = [0, 100];
-$dot    = [13, 13];
-
-// Function that rightly sorting points
-$arrayOfPoints[] = $point1;
-$arrayOfPoints[] = $point2;
-$arrayOfPoints[] = $point3;
-function sortPoints($arrayOfPoints) {
-    //var_dump($arrayOfPoints);
-    
-    $maxY = $arrayOfPoints[0][1];
-    //var_dump($maxY);
-    
-    
-}
-
-sortPoints($arrayOfPoints);
+$dot    = [10, 10];
 
 // Function of createing equation by coordinates of two dotes.
 function createEquationByTwoDotes($x1, $y1, $x2, $y2) {
@@ -46,6 +31,71 @@ function createEquationByTwoDotes($x1, $y1, $x2, $y2) {
     
     return [$xCoefficient, 'x', $yCoefficient, 'y', '=', $rightValue];
 }
+
+// Function that return maxX of two dotes.
+function getPointWithMaxXFromTwoPoints($point1, $point2) {
+    if ($point1[0] >= $point2[0]) 
+        return $point1;
+    else
+        return $point2;
+}
+
+// Function that rightly detect case
+function detectCase($point1, $point2, $point3) {    
+    $maxY = max($point1[1], $point2[1], $point3[1]);
+    $minY = min($point1[1], $point2[1], $point3[1]);
+
+    //calculate number of points with the same maxY
+    $arrayOfPointsWithTheSameMaxY = [];
+    if ($point1[1] === $maxY) $arrayOfPointsWithTheSameMaxY[] = $point1;
+    if ($point2[1] === $maxY) $arrayOfPointsWithTheSameMaxY[] = $point2;
+    if ($point3[1] === $maxY) $arrayOfPointsWithTheSameMaxY[] = $point3;
+    //var_dump($arrayOfPointsWithTheSameMaxY);
+    
+    //calculate number of points with the same minY
+    $arrayOfPointsWithTheSameMinY = [];
+    if ($point1[1] === $minY) $arrayOfPointsWithTheSameMinY[] = $point1;
+    if ($point2[1] === $minY) $arrayOfPointsWithTheSameMinY[] = $point2;
+    if ($point3[1] === $minY) $arrayOfPointsWithTheSameMinY[] = $point3;
+    //var_dump($arrayOfPointsWithTheSameMinY);
+    
+    // First 5 cases if two of three dotes on the same line at the bottom.
+    if (sizeof($arrayOfPointsWithTheSameMinY) == 2) 
+    {
+        // 1. 90 degrees angle at the left.
+        $pointWithMaxXFromTwoPoints = getPointWithMaxXFromTwoPoints(
+            $arrayOfPointsWithTheSameMinY[0], 
+            $arrayOfPointsWithTheSameMinY[1]
+        );
+    
+        if ($pointWithMaxXFromTwoPoints[0] > $arrayOfPointsWithTheSameMaxY[0][0]) {
+            //$x1 = 0;
+            //$y1 = 100;
+            //$x2 = 100;
+            //$y2 = 0;
+            $x1 = $arrayOfPointsWithTheSameMaxY[0][0];
+            $y1 = $arrayOfPointsWithTheSameMaxY[0][1];
+            $x2 = $pointWithMaxXFromTwoPoints[0];
+            $y2 = $pointWithMaxXFromTwoPoints[1];
+            
+            $equation = createEquationByTwoDotes($x1, $y1, $x2, $y2);
+        
+            return [1, "equations" => [$equation]];
+        }    
+        
+        // 2. 90 degrees angle at the right.
+        
+    }
+    
+    // Second 5 cases if two of three dotes on the same line at the top.
+    if (sizeof($arrayOfPointsWithTheSameMaxY) == 2) 
+    {
+    
+    }
+}
+
+$case = detectCase($point1, $point2, $point3);
+var_dump($case);
 
 // Detect cases.
 // 1. 90 degrees angle at the left and two of three dotes on same line at the bottom.
