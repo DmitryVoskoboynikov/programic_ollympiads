@@ -92,6 +92,9 @@ function detectCase($point1, $point2, $point3) {
     {
     
     }
+    
+    // Last case when all three points have different value of y of pair (x, y).
+    return [11, "equations" => [$equation1, $equation2, $equation3]];
 }
 
 $case = detectCase($point1, $point2, $point3);
